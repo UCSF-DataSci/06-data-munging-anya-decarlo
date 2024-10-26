@@ -32,7 +32,7 @@
    - Example: [print(data['income_groups'].unique())]
    - Potential Impact: [Within each income group, there are two reported distinct catgories for each true category. Meaning, each income catgeory has two catgegories due to typos. The population within each income catgory is not accurutely represented. ]
 
- 3. **[income_groups Data Has Missing Values]**
+3. **[income_groups Data Has Missing Values]**
    - Description: [The income_groups variable has missing values (NaN)]
    - Affected Column(s): [data[['income_groups']]]
    - Example: [print(data[data['income_groups'].isna()])]
@@ -77,35 +77,35 @@
 
 
 10. **[year Data Type]**
-   - Description: [The year variable is float64 data types which are primarly used used for continuous numerical data. The year variable is a date-time variable.]
+    - Description: [The year variable is float64 data types which are primarly used used for continuous numerical data. The year variable is a date-time variable.]
    - Affected Column(s): [data[['year']]]
    - Example: [print(data['year'].dtype)]
    - Potential Impact: [Inaccurate representation of a date-time data, models and functions will incorrectly interpret the date-time data as continuous values, and operations that rely on date-time foramt will not work ]
 
 11. **[year Data Has Missing Value]**
-   - Description: [The gender variable has missing values (NaN)]
-   - Affected Column(s): [data[['year']]]
-   - Example: [print(data['year'].value_counts(dropna=False))]
-   - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled, could impact validity of comparison across years if too much data missing, and may impact certain models without appropriate handling of NaN values through imputatin or other methods.]
+    - Description: [The gender variable has missing values (NaN)]
+    - Affected Column(s): [data[['year']]]
+    - Example: [print(data['year'].value_counts(dropna=False))]
+    - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled, could impact validity of comparison across years if too much data missing, and may impact certain models without appropriate handling of NaN values through imputatin or other methods.]
 
 12. **[population Data Type]**
-   - Description: [The population variable is float64 data types which are primarly used used for continuous numerical data. Population is a discrete variable.]
-   - Affected Column(s): [data[['population']]]
-   - Example: [print(data['population'].dtype)]
-   - Potential Impact: [Inaccurate representation of a discrete variable, models and functions will incorrectly interpret the discrete variable as continuous values, and operations that rely the correct variable assignment could perform improprely.]
+    - Description: [The population variable is float64 data types which are primarly used used for continuous numerical data. Population is a discrete variable.]
+    - Affected Column(s): [data[['population']]]
+    - Example: [print(data['population'].dtype)]
+    - Potential Impact: [Inaccurate representation of a discrete variable, models and functions will incorrectly interpret the discrete variable as continuous values, and operations that rely the correct variable assignment could perform improprely.]
 
 13. **[population Data Has Missing Value]**
-   - Description: [The population variable has missing values (NaN)]
-   - Affected Column(s): [data[['population']]]
-   - Example: [print(data['population'].value_counts(dropna=False))]
-   - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled.]
+    - Description: [The population variable has missing values (NaN)]
+    - Affected Column(s): [data[['population']]]
+    - Example: [print(data['population'].value_counts(dropna=False))]
+    - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled.]
 
 
 14 **[Duplicated Date]**
-   - Description: [The dataset has duplicated rows which is innacurate.]
-   - Affected Column(s): [data.columns]
-   - Example: [print(data.duplicated().sum())]
-   - Potential Impact: [Means, counts, and sums will be skewed since duplicated values will contribute more to these counts, functions that rely on counts will be incorrect, and models will overfit due to the duplicated data.]
+    - Description: [The dataset has duplicated rows which is innacurate.]
+    - Affected Column(s): [data.columns]
+    - Example: [print(data.duplicated().sum())]
+    - Potential Impact: [Means, counts, and sums will be skewed since duplicated values will contribute more to these counts, functions that rely on counts will be incorrect, and models will overfit due to the duplicated data.]
    
 
 
