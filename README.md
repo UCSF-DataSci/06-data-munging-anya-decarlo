@@ -78,9 +78,9 @@
 
 10. **[year Data Type]**
     - Description: [The year variable is float64 data types which are primarly used used for continuous numerical data. The year variable is a date-time variable.]
-   - Affected Column(s): [data[['year']]]
-   - Example: [print(data['year'].dtype)]
-   - Potential Impact: [Inaccurate representation of a date-time data, models and functions will incorrectly interpret the date-time data as continuous values, and operations that rely on date-time foramt will not work ]
+    - Affected Column(s): [data[['year']]]
+    Example: [print(data['year'].dtype)]
+    - Potential Impact: [Inaccurate representation of a date-time data, models and functions will incorrectly interpret the date-time data as continuous values, and operations that rely on date-time foramt will not work ]
 
 11. **[year Data Has Missing Value]**
     - Description: [The gender variable has missing values (NaN)]
@@ -101,7 +101,7 @@
     - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled.]
 
 
-14 **[Duplicated Date]**
+14.  **[Duplicated Date]**
     - Description: [The dataset has duplicated rows which is innacurate.]
     - Affected Column(s): [data.columns]
     - Example: [print(data.duplicated().sum())]
