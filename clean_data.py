@@ -60,15 +60,9 @@ def clean_data(messy_file, clean_file):
     else:
         raise ValueError("Error: Unexpected values found in 'income_groups'.")
     
-    #Impute NaN with median age 
-    #data['age'].fillna(data['age'].median(), inplace=True)
-
+    #convert age and impute na with mean
     data['age'] = data['age'].fillna(data['age'].median()).astype('Int64')
-
-   
-    #Convert 'age' to integer data type 
-    data['age'] = data['age'].astype('Int64')
-
+    
     #Convert 'gender' to categorical data type 
     data['gender'] = data['gender'].astype('category')
 
