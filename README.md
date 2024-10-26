@@ -100,7 +100,7 @@
     - Example: [print(data['population'].value_counts(dropna=False))]
     - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled.]
 
-14.  **[Duplicated Data]**
+14. **[population Data Has Missing Value]**
     - Description: [The dataset has duplicated rows which is innacurate.]
     - Affected Column(s): [data.columns]
     - Example: [print(data.duplicated().sum())]
