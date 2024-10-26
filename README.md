@@ -50,58 +50,58 @@
    - Example: [print(data[data['age'].isna()][['age']])]
    - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled, could impact validity of comparison across age if too much data missing, and may impact certain models without appropriate handling of NaN values through imputatin or other methods.]
 
-   6. **[gender Data Type]**
+6. **[gender Data Type]**
    - Description: [The gender variable is float64 data types which are primarly used used for continuous numerical data]
    - Affected Column(s): [data[['gender']]]
    - Example: [print(data['gender'].dtype)]
    - Potential Impact: [Inaccurate representation of a categorical data, models and functions will incorrectly handle the values as continious numerical variable ]
 
-   5. **[age Data Has Missing Value]**
+7. **[age Data Has Missing Value]**
    - Description: [The age variable has missing values (NaN)]
    - Affected Column(s): [data[['age']]]
    - Example: [print(data[data['age'].isna()][['age']])]
    - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled, could impact validity of comparison across age if too much data missing, and may impact certain models without appropriate handling of NaN values through imputatin or other methods.]
 
 
-6. **[gender Data Type]**
+8. **[gender Data Type]**
    - Description: [The gender variable is float64 data types which are primarly used used for continuous numerical data. Gender is a categorical variable.]
    - Affected Column(s): [data[['gender']]]
    - Example: [print(data['gender'].dtype)]
    - Potential Impact: [Inaccurate representation of a categorical data, models and functions will incorrectly handle the values as continious numerical variable ]
 
-   5. **[gender Data Has Missing Value]**
+9. **[gender Data Has Missing Value]**
    - Description: [The gender variable has missing values (NaN)]
    - Affected Column(s): [data[['gender']]]
    - Example: [print(data[data['gender'].isna()][['age']])]
    - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled, could impact validity of comparison across gender if too much data missing, and may impact certain models without appropriate handling of NaN values through imputatin or other methods.]
 
 
-   7. **[year Data Type]**
+10. **[year Data Type]**
    - Description: [The year variable is float64 data types which are primarly used used for continuous numerical data. The year variable is a date-time variable.]
    - Affected Column(s): [data[['year']]]
    - Example: [print(data['year'].dtype)]
    - Potential Impact: [Inaccurate representation of a date-time data, models and functions will incorrectly interpret the date-time data as continuous values, and operations that rely on date-time foramt will not work ]
 
-   8. **[year Data Has Missing Value]**
+11. **[year Data Has Missing Value]**
    - Description: [The gender variable has missing values (NaN)]
    - Affected Column(s): [data[['year']]]
    - Example: [print(data['year'].value_counts(dropna=False))]
    - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled, could impact validity of comparison across years if too much data missing, and may impact certain models without appropriate handling of NaN values through imputatin or other methods.]
 
-    9. **[population Data Type]**
+12. **[population Data Type]**
    - Description: [The population variable is float64 data types which are primarly used used for continuous numerical data. Population is a discrete variable.]
    - Affected Column(s): [data[['population']]]
    - Example: [print(data['population'].dtype)]
    - Potential Impact: [Inaccurate representation of a discrete variable, models and functions will incorrectly interpret the discrete variable as continuous values, and operations that rely the correct variable assignment could perform improprely.]
 
-   10. **[population Data Has Missing Value]**
+13. **[population Data Has Missing Value]**
    - Description: [The population variable has missing values (NaN)]
    - Affected Column(s): [data[['population']]]
    - Example: [print(data['population'].value_counts(dropna=False))]
    - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled.]
 
 
-11. **[Duplicated Date]**
+14 **[Duplicated Date]**
    - Description: [The dataset has duplicated rows which is innacurate.]
    - Affected Column(s): [data.columns]
    - Example: [print(data.duplicated().sum())]
