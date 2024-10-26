@@ -105,8 +105,26 @@
     - Affected Column(s): [data.columns]
     - Example: [print(data.duplicated().sum())]
     - Potential Impact: [Means, counts, and sums will be skewed since duplicated values will contribute more to these counts, functions that rely on counts will be incorrect, and models will overfit due to the duplicated data.]
+
+
+
+    ### Indentified Solutions 
+
+1. **[income_groups Data Type]**
+   - Solution Technique: [Convert income groups from object to categorical]
+   - Justification: [Operations will perform better, grouping will be faster, and sorting can be based on categories. Logical ordering will also be allowed. ]
+   - Impact on Dateset: [Variable type is changed]
+   - Any Assumptions: [Assuming the catefories will be grouped by their level, assuming the categories of income are tiered]
+
+
+2. **[income_groups Data Typos]**
+   - Solution Technique: [Define replacements, replace with dictionary, ensure only 4 categories in dataset]
+   - Justification: [ Categories need to be represented correctly, each group needs to be accurate]
+   - Impact on Dateset: [The amount of categories is now 4]
+   - Any Assumptions: [Assuming the catefories will be grouped by their level, assuming the categories of income are tiered]
+
    
 
 
 
- 
+   
