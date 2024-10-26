@@ -177,7 +177,7 @@
 1. The cleaned data set in comparison to the original one has a better handling of missing values, correct income categories, and appropriate data types for the numerical variables. 
 2. Checking if the impact of imputating was challenging, making new categories was challenging, and fixing why the categorical variables were still reporting as a Dtype of object was difficult. 
 3. I learned how to organize the process of cleaning data and how to check if data cleaning was actually implemented. Through the checks I wrote in the code, it seemed like it was working, but after importing the cleaned data set and displaying the new formatted table, I found more errors. 
-4. Although the date-time format for year has been changed, the Dtype is still reporting sa int64 which needs to be investigated. Further analysis and visualization of the data prior to imputation would allow for better analysis of how imputation impacted the spread of the data. 
+4. Although the date-time format for year has been changed, the Dtype is still reporting sa int64 which needs to be investigated. Further analysis and visualization of the data prior to imputation would allow for better analysis of how imputation impacted the spread of the data. How I handled missing values also needs to be improved. I don't like removing data if I don't have to, but it might be necessary in order to maintain the correct Dtype for the groups. 
     
 
 
