@@ -32,7 +32,7 @@
    - Example: [print(data['income_groups'].unique())]
    - Potential Impact: [Within each income group, there are two reported distinct catgories for each true category. Meaning, each income catgeory has two catgegories due to typos. The population within each income catgory is not accurutely represented. ]
 
-   3. **[income_groups Data Has Missing Values]**
+ 3. **[income_groups Data Has Missing Values]**
    - Description: [The income_groups variable has missing values (NaN)]
    - Affected Column(s): [data[['income_groups']]]
    - Example: [print(data[data['income_groups'].isna()])]
