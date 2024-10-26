@@ -43,8 +43,9 @@ def clean_data(messy_file, clean_file):
     #Replace typos 
     data['income_groups'] = data['income_groups'].replace(income_group_replacements)
 
-    #Add unknown to account for category check
-    data['income_groups'] = data['income_groups'].cat.add_categories('unknown')
+    #add uknown
+    if 'unknown' not in data['income_groups'].cat.categories:
+        data['income_groups'] = data['income_groups'].cat.add_categories('unknown')
 
     #replace NaN missing values with "unknown"
     data['income_groups'].fillna('unknown', inplace=True)  
@@ -60,7 +61,10 @@ def clean_data(messy_file, clean_file):
         raise ValueError("Error: Unexpected values found in 'income_groups'.")
     
     #Impute NaN with median age 
-    data['age'].fillna(data['age'].median(), inplace=True)
+    #data['age'].fillna(data['age'].median(), inplace=True)
+
+    data['age'] = data['age'].fillna(data['age'].median()).astype('Int64')
+
    
     #Convert 'age' to integer data type 
     data['age'] = data['age'].astype('Int64')
@@ -101,7 +105,6 @@ def clean_data(messy_file, clean_file):
         print(f"\nColumn: {col}")
         print("Before Cleaning:\n", initial_value_counts[col])
         print("After Cleaning:\n", final_value_counts[col])
-
 
     #Save clean data to CSV
     data.to_csv(clean_file, index=False)

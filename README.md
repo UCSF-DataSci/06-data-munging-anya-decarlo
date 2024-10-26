@@ -9,12 +9,14 @@
 - **Rows**: [125718]
 - **Columns**: [5]
 
-          Column  Non-Null Count    Dtype  Unique Values              Mean
-0  income_groups          119412   object              8               N/A
-1            age          119495  float64            101         50.007038
-2         gender          119811  float64              3          1.578578
-3           year          119516  float64            169       2025.068049
-4     population          119378  float64         114925  111298303.154375
+ | Column         | Non-Null Count | Dtype   | Unique Values | Mean           |
+|----------------|----------------|---------|---------------|----------------|
+| income_groups  | 119412         | object  | 8             | N/A            |
+| age            | 119495         | float64 | 101           | 50.007038      |
+| gender         | 119811         | float64 | 3             | 1.578578       |
+| year           | 119516         | float64 | 169           | 2025.068049    |
+| population     | 119378         | float64 | 114925        | 111298303.1544 |
+
 
 
 ### Identified Issues
@@ -56,51 +58,38 @@
    - Example: [print(data['gender'].dtype)]
    - Potential Impact: [Inaccurate representation of a categorical data, models and functions will incorrectly handle the values as continious numerical variable ]
 
-7. **[age Data Has Missing Value]**
-   - Description: [The age variable has missing values (NaN)]
-   - Affected Column(s): [data[['age']]]
-   - Example: [print(data[data['age'].isna()][['age']])]
-   - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled, could impact validity of comparison across age if too much data missing, and may impact certain models without appropriate handling of NaN values through imputatin or other methods.]
-
-
-8. **[gender Data Type]**
-   - Description: [The gender variable is float64 data types which are primarly used used for continuous numerical data. Gender is a categorical variable.]
-   - Affected Column(s): [data[['gender']]]
-   - Example: [print(data['gender'].dtype)]
-   - Potential Impact: [Inaccurate representation of a categorical data, models and functions will incorrectly handle the values as continious numerical variable ]
-
-9. **[gender Data Has Missing Value]**
+7. **[gender Data Has Missing Values]**
    - Description: [The gender variable has missing values (NaN)]
    - Affected Column(s): [data[['gender']]]
    - Example: [print(data[data['gender'].isna()][['age']])]
    - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled, could impact validity of comparison across gender if too much data missing, and may impact certain models without appropriate handling of NaN values through imputatin or other methods.]
 
 
-10. **[year Data Type]**
+8. **[year Data Type]**
     - Description: [The year variable is float64 data types which are primarly used used for continuous numerical data. The year variable is a date-time variable.]
     - Affected Column(s): [data[['year']]]
     Example: [print(data['year'].dtype)]
     - Potential Impact: [Inaccurate representation of a date-time data, models and functions will incorrectly interpret the date-time data as continuous values, and operations that rely on date-time foramt will not work ]
 
-11. **[year Data Has Missing Value]**
+9. **[year Data Has Missing Value]**
     - Description: [The gender variable has missing values (NaN)]
     - Affected Column(s): [data[['year']]]
     - Example: [print(data['year'].value_counts(dropna=False))]
     - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled, could impact validity of comparison across years if too much data missing, and may impact certain models without appropriate handling of NaN values through imputatin or other methods.]
 
-12. **[population Data Type]**
+10. **[population Data Type]**
     - Description: [The population variable is float64 data types which are primarly used used for continuous numerical data. Population is a discrete variable.]
     - Affected Column(s): [data[['population']]]
     - Example: [print(data['population'].dtype)]
     - Potential Impact: [Inaccurate representation of a discrete variable, models and functions will incorrectly interpret the discrete variable as continuous values, and operations that rely the correct variable assignment could perform improprely.]
 
-13. **[population Data Has Missing Value]**
+11. **[population Data Has Missing Value]**
     - Description: [The population variable has missing values (NaN)]
     - Affected Column(s): [data[['population']]]
     - Example: [print(data['population'].value_counts(dropna=False))]
     - Potential Impact: [Incomplete analysis, grouping errors unless NaN values correctly handled.]
 
-14. **[population Data Has Duplicated Data]**
+12. **[Duplicated Data]**
     - Description: [The dataset has duplicated rows which is innacurate.]
     - Affected Column(s): [data.columns]
     - Example: [print(data.duplicated().sum())]
@@ -123,7 +112,76 @@
    - Impact on Dateset: [The amount of categories is now 4]
    - Any Assumptions: [Assuming the catefories will be grouped by their level, assuming the categories of income are tiered]
 
-   
+3. **[income_groups Data Has Missing Values]**
+    - Solution Technique: [Add "unknown" catgory to income_groups]
+    - Justification: [Allows to do analysis including unknown groups while still maintaing integrity of original 4 groups and other data without removing]
+    - Impact on Dataset: [Added a new category to income_groups but no rows deleted]
+    - Any Assumptions: [Assumed data was unknown and not missing for any other reason]
+
+4.  **[age Data Type]** 
+    - Solution Technique: [Converted data type to int64]
+    - Justification [Neccessary for models using discrete values, accurate representation of age]
+    - Impact on Data Set [age is not an integer]
+    - Any Assumptions [None]
+
+5. **[age Data Has Missing Values]**
+    - Soltion Technique: [Imputed missing age with median]
+    - Justification: [Preserve data and statistical power of age]
+    - Impact on Data Set: [Distribution remained fairly similar. Mean before imputation: 49.9 std before imputation: 29.15, Mean after imputation: 49.9, std after imputation: 28.43]
+    - Any Assumptins : [Assumed Normal Distribution]
+
+6. **[gender Data Type]**
+    - Solution Technique: [Changed data type to categorical]
+    - Justification: [Analyses need categorical variables to provide accurate insight across gender categories]
+    - Impact on Data Set: [Changed data type of gender to category]
+    - Any Assumptions: [Assumed 3 was the correct category count and not a coding error]
+
+7. **[gender Data Has Missing Values]**
+    - Solution Technique: [Changed NaN values to unknown]
+    - Justification: Allows data analysis including unknown groups while still maintaing integrity 
+    - Impact on Data Set: [Added new category to gender]
+    - Any Assumptions: [NA]
+
+8. **[year Data Type]**
+    - Solution Technique: [Changed all values to date_time format]
+    - Justification: [Date-time format neccessary for accurate models and operations that rely on date-time format]
+    - Impact on Data Set: [variables now date time]
+    - Any Assumptons: [Assumed format correct and that all months and dates were accurate, example: no Feburary 31st]
+
+9. **[year Data Has Missing Vales]**
+    - Solution Technique: [Sentintal Imputation using year 1800 ]
+    - Justification: [Allowed date-time format to remain intact]
+    - Impact on Data Set: [Averages on year could be impacted without proper handling]
+    - Any Assumptions: [Assunmes user knows 1800 is a sentintal imputation and not a valid date]
+
+10. **[population Data Type]**
+    - Solution Technique: [Replaced data type with int]
+    - Justification: [Neccessary to perform accurate models using population as a discrete value] 
+    - Impact on Data Set: [data type now an integer]
+    - Any Assumptions: [NA]
+
+11. **[population Data Has Missing Value]**
+    - Solution Technique: [Imputation with mean]
+    - Justification: [Preserve data and statistical power of population ] 
+    - Impact on Data Set: [missing values now are replaced with mean]
+    - Any Assumptions: [Normal Distribution of population]
+
+12. **[Duplicated Data]**
+    - Solution Technique: [remove duplicated data from the dataset]
+    - Justification: [innacurate statistical analysis without removal, functions would be incorrect, models would overfit, bad data practice to keep]
+    - Impact on Data Set: [2950 rows were removed]
+    - Any Assumptions: [Assume less than 10% of original data]
+
+### Final Thoughts
+
+1. The cleaned data set in comparison to the original one has a better handling of missing values, correct income categories, and appropriate data types for the numerical variables. 
+2. Checking if the impact of imputating was challenging, making new categories was challenging, and fixing why the categorical variables were still reporting as a Dtype of object was difficult. 
+3. I learned how to organize the process of cleaning data and how to check if data cleaning was actually implemented. Through the checks I wrote in the code, it seemed like it was working, but after importing the cleaned data set and displaying the new formatted table, I found more errors. 
+4. Although the date-time format for year has been changed, the Dtype is still reporting sa int64 which needs to be investigated. Further analysis and visualization of the data prior to imputation would allow for better analysis of how imputation impacted the spread of the data. 
+    
+
+
+
 
 
 
