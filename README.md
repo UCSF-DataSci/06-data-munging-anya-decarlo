@@ -186,7 +186,7 @@
     - Any Assumptions: [Assuming outliers are due to actual variability in data and are not measurnment errors]
 
 
-### Income groups are correctly cleaned.
+### Clean Data Summary
 
 | Column         | Non-Null Count | Dtype            | Unique Values | Mean              |
 |----------------|----------------|------------------|---------------|------------------:|
