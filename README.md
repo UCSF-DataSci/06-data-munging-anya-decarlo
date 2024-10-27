@@ -185,6 +185,18 @@
     - Impact on Data Set: []
     - Any Assumptions: [Assuming outliers are due to actual variability in data and are not measurnment errors]
 
+
+### Income groups are correctly cleaned.
+
+| Column         | Non-Null Count | Dtype            | Unique Values | Mean              |
+|----------------|----------------|------------------|---------------|------------------:|
+| income_groups  | 105,716        | category         | 4             | N/A               |
+| age            | 105,716        | int64            | 101           | 50.037109         |
+| gender         | 105,716        | category         | 3             | N/A               |
+| year           | 105,716        | datetime64[ns]   | 169           | N/A               |
+| population     | 105,716        | int64            | 99,033        | 113,277,972.864921 |
+
+
 ### Final Thoughts
 
 1. The cleaned data set in comparison to the original one has a better handling of missing values, correct income categories, and appropriate data types for the numerical variables. 
@@ -192,7 +204,7 @@
 3. I learned how to organize the process of cleaning data and how to check if data cleaning was actually implemented. Through the checks I wrote in the code, it seemed like it was working, but after importing the cleaned data set and displaying the new formatted table, I found more errors. 
 4. Although the date-time format for year has been changed, the Dtype is still reporting sa int64 which needs to be investigated. Further analysis and visualization of the data prior to imputation would allow for better analysis of how imputation impacted the spread of the data. How I handled missing values also needs to be improved. 
 *update 10-26-24* 
-Handling of missing values was improved. All variabels are reported as correct Dtype. Further improvement includes checking to make sure no years are past 2024, capping outliers, renaming gender categories, and handling the high percent of missing data removed. 
+Handling of missing values was improved. All variabels are reported as correct Dtype. Further improvement includes checking to make sure no years are past 2024, capping outliers, renaming gender categories, and handling the high percent of missing data removed. This is a fun project!
 
 
 
