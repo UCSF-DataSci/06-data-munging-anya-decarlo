@@ -96,6 +96,13 @@
     - Potential Impact: [Means, counts, and sums will be skewed since duplicated values will contribute more to these counts, functions that rely on counts will be incorrect, and models will overfit due to the duplicated data.]
 
 
+13. **[Handling Outliers]**
+    - Description: [The dataset may have outliers in the numerical data]
+    - Affected Column(s): [data.columns]
+    - Example: [Outliers are values that that fall outside of
+    1.5 +- IQR]
+    - Potential Impact: [Outliers can skew results, influence models, hide patterns in data, impact predictions,and affect normality assumptions]
+
 
     ### Indentified Solutions 
 
@@ -172,13 +179,20 @@
     - Impact on Data Set: [2950 rows were removed]
     - Any Assumptions: [Assume less than 10% of original data]
 
+13. **[Handling Outliers]** 
+    - Solution Technique: [Identify and cap outliers]
+    - Justification: [Preserve the size of the dataset and do not have sufficient evidence that outliers aren't relevent to the study]
+    - Impact on Data Set: []
+    - Any Assumptions: [Assuming outliers are due to actual variability in data and are not measurnment errors]
+
 ### Final Thoughts
 
 1. The cleaned data set in comparison to the original one has a better handling of missing values, correct income categories, and appropriate data types for the numerical variables. 
-2. Checking if the impact of imputating was challenging, making new categories was challenging, and fixing why the categorical variables were still reporting as a Dtype of object was difficult. 
+2. Checking if the impact of imputating was challenging, making new categories was challenging, and fixing why the categorical variables were still reporting as a Dtype of object was difficult. Challenges were overcome by changing approach to handling NaN values. Instead of trying to keep them in non integer variables, all rows with NaN were removed. 
 3. I learned how to organize the process of cleaning data and how to check if data cleaning was actually implemented. Through the checks I wrote in the code, it seemed like it was working, but after importing the cleaned data set and displaying the new formatted table, I found more errors. 
-4. Although the date-time format for year has been changed, the Dtype is still reporting sa int64 which needs to be investigated. Further analysis and visualization of the data prior to imputation would allow for better analysis of how imputation impacted the spread of the data. How I handled missing values also needs to be improved. I don't like removing data if I don't have to, but it might be necessary in order to maintain the correct Dtype for the groups. 
-    
+4. Although the date-time format for year has been changed, the Dtype is still reporting sa int64 which needs to be investigated. Further analysis and visualization of the data prior to imputation would allow for better analysis of how imputation impacted the spread of the data. How I handled missing values also needs to be improved. 
+*update 10-26-24* 
+Handling of missing values was improved. All variabels are reported as correct Dtype. Further improvement includes checking to make sure no years are past 2024, capping outliers, renaming gender categories, and handling the high percent of missing data removed. 
 
 
 

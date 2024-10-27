@@ -28,7 +28,70 @@ def clean_data(messy_file, clean_file):
     if len(data) == initial_row_count:
         print("Error: No duplicates were removed.")
     else:
-        print(f"Duplicate removal successful. {initial_row_count - len(data)} rows removed.")
+        print(f"All duplicates removed. {initial_row_count - len(data)} rows removed.")
+
+    #Track Current Row Count after duplication removal 
+    current_row_count=len(data)
+
+    #Replace age empty strings with NaN 
+    data['age'] = data['age'].replace(['', ' '], pd.NA)
+
+    #Check for age NaN values before imputation 
+    age_nans = data['age'].isna().sum()
+
+    #Impute age NaN values with the mean 
+    data['age'] = data['age'].fillna(data['age'].mean())
+
+    #Convert 'age' to integer 
+    data['age'] = data['age'].round().astype(int)
+
+    #Convert empty strings and spaces in'population' to NaN
+    data['population'] = data['population'].replace(['', ' '], pd.NA)  
+
+    #Check for NaN before imputation 
+    population_nans = data['population'].isna().sum()
+
+    #Impute 'population' NaN values with mean 
+    data['population'] = data['population'].fillna(data['population'].mean())
+
+    #Convert 'population" to integer 
+    data['population'] = data['population'].round().astype(int)
+
+    #Check if any NaN after imputation 
+    population_nans_left = data['population'].isna().sum()
+    age_nans_left = data['age'].isna().sum()    
+
+    #Print statement to ensure no NaN values after imputation 
+    if population_nans_left == 0:
+        print("All NaN values in 'population' have been imputed.")
+    else:
+        print(f"Warning: {population_nans_left} NaN values remain in 'population'.")
+    if age_nans_left == 0:
+        print("All NaN values in 'age' have been imputed.")
+    else:
+        print(f"Warning: {age_nans_left} NaN values remain in 'age'.")
+
+    #Replace empty strings with NaN 
+    data.replace('', pd.NA, inplace=True)
+
+    #Drop missing values
+    data.dropna(inplace=True)
+
+    #Check if too many rows were removed 
+    rows_after_nan_removal = len(data)
+    rows_removed_due_to_nan = current_row_count - rows_after_nan_removal
+
+    if rows_removed_due_to_nan == 0:
+        print("No rows with NaN or missing values were removed.")
+    elif rows_removed_due_to_nan / current_row_count > 0.1: 
+        print(f"Warning: {rows_removed_due_to_nan} rows removed due to missing values, "
+            f"which is {rows_removed_due_to_nan / current_row_count:.2%} of the data.")
+    else:
+        print(f"Missing value removal successful. {rows_removed_due_to_nan} rows removed.")
+
+    print(f"Initial row count: {initial_row_count}")
+    print(f"Final row count: {rows_after_nan_removal}")
+    print(f"Total rows removed: {initial_row_count - rows_after_nan_removal}")
 
     #Convert "income_group" to categorical data type 
     data['income_groups'] = data['income_groups'].astype('category')
@@ -43,63 +106,34 @@ def clean_data(messy_file, clean_file):
     #Replace typos 
     data['income_groups'] = data['income_groups'].replace(income_group_replacements)
 
-    #add uknown
-    if 'unknown' not in data['income_groups'].cat.categories:
-        data['income_groups'] = data['income_groups'].cat.add_categories('unknown')
-
-    #replace NaN missing values with "unknown"
-    data['income_groups'].fillna('unknown', inplace=True)  
-
     #Check for 4 unique values 
     unique_values = data['income_groups'].unique()
     print(f"Unique values in 'income_groups': {unique_values}")
 
-    #Error Handling to ensure only 5 unique categories 
-    if len(unique_values) == 5:
+    #Error Handling to ensure only 4 unique categories 
+    if len(unique_values) == 4:
         print("Income groups are correctly cleaned.")
     else:
         raise ValueError("Error: Unexpected values found in 'income_groups'.")
     
-    #convert age and impute na with mean
-    data['age'] = data['age'].fillna(data['age'].median()).astype('Int64')
-    
     #Convert 'gender' to categorical data type 
     data['gender'] = data['gender'].astype('category')
 
-    #Add unknown category 
-    data['gender'] = data['gender'].cat.add_categories('unknown')
-
-    #Replace NaN missing values with "unknown"
-    data['gender'].fillna('unknown', inplace=True)
-    
     #Convert 'year' to date-time data type
-    data['year'] = pd.to_datetime(data['year'].astype('Int64'), format='%Y', errors='coerce')
+    data['year'] = pd.to_datetime(data['year'].astype(int).astype(str), format='%Y', errors='coerce')
 
-    #Convert NaN values to year 1800
-    data['year'].fillna(pd.to_datetime('1800', format='%Y'), inplace=True) 
+    #Summarize cleaned data 
+    summarize_new = pd.DataFrame({
+        'Column': data.columns,
+        'Non-Null Count': data.notnull().sum().values,
+        'Dtype': data.dtypes.values,
+        'Unique Values': data.nunique().values,
+        'Mean': data.mean(numeric_only=True).reindex(data.columns, fill_value='N/A').values
+    })
 
-    #Convert 'population' to integer data type and converts NaN to O
-    data['population'] = data['population'].fillna(0).astype(int)  
-
-    #Impute 'population' 0 values with mean 
-    data['population'].fillna(data['population'].mean(), inplace=True)
-
-    #New value counts for each variable 
-    final_value_counts = {
-        'income_groups': data['income_groups'].value_counts(dropna=False),
-        'age': data['age'].value_counts(dropna=False),
-        'gender': data['gender'].value_counts(dropna=False),
-        'year': data['year'].value_counts(dropna=False),
-        'population': data['population'].value_counts(dropna=False)
-    }
-
-#Print Comparison of Value Counts 
-    print("\nComparison of Value Counts (Before vs After Cleaning):")
-    for col in initial_value_counts:
-        print(f"\nColumn: {col}")
-        print("Before Cleaning:\n", initial_value_counts[col])
-        print("After Cleaning:\n", final_value_counts[col])
-
+    #display the cleaned data table   
+    print(summarize_new)
+    
     #Save clean data to CSV
     data.to_csv(clean_file, index=False)
     
