@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np 
 import argparse 
 from tqdm import tqdm
+from datetime import datetime 
 
 def clean_data(messy_file, clean_file): 
     #Load Datea
@@ -139,30 +140,34 @@ def clean_data(messy_file, clean_file):
     #Convert 'year' to date-time data type
     data['year'] = pd.to_datetime(data['year'].astype(int).astype(str), format='%Y', errors='coerce')
 
-    #Find and print years great than 2024
-    print("\nChecking for years greater than 2024...")
-    invalid_years = data[data['year'].dt.year > 2024]
+    #Current_year
+    current_year = datetime.now().year
+
+    #Find and print years greater than the current year
+    print(f"\nChecking for years greater than {current_year}...")
+    invalid_years = data[data['year'].dt.year > current_year]
     if not invalid_years.empty:
-        print(f"Found {len(invalid_years)} rows with years greater than 2024:\n{invalid_years}")
+        print(f"Found {len(invalid_years)} rows with years greater than {current_year}:\n{invalid_years}")
     else:
-        print("No years greater than 2024 found.")
+        print(f"No years greater than {current_year} found.")
 
-    #Remove rows where year is greater than 2024
-    print("\nRemoving rows with years greater than 2024...")
-    data = data[data['year'].dt.year <= 2024]
+    #Remove rows where the year is greater than the current year
+    print(f"\nRemoving rows with years greater than {current_year}...")
+    initial_row_count = len(data)
+    data = data[data['year'].dt.year <= current_year]
 
-    #Calculate and print percent of rows removed 
+    #Calculate and print the percentage of rows removed
     rows_removed = initial_row_count - len(data)
     percent_removed = (rows_removed / initial_row_count) * 100
     print(f"\nTotal rows removed: {rows_removed} out of {initial_row_count} "
-      f"({percent_removed:.2f}% of the rows).")
+        f"({percent_removed:.2f}% of the rows).")
 
-    #Verify the removal of invalid years
-    if (data['year'].dt.year > 2024).any():
-        print("Error: Some rows with years greater than 2024 still remain!")
+    #Verify that no rows with future years remain
+    if (data['year'].dt.year > current_year).any():
+        print(f"Error: Some rows with years greater than {current_year} still remain!")
     else:
-     print("All rows with years greater than 2024 have been successfully removed.")
-
+        print(f"All rows with years greater than {current_year} have been removed.")
+   
     #Summarize cleaned data 
     summarize_new = pd.DataFrame({
         'Column': data.columns,

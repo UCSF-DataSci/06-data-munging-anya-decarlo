@@ -103,11 +103,17 @@
     1.5 +- IQR]
     - Potential Impact: [Outliers can skew results, influence models, hide patterns in data, impact predictions,and affect normality assumptions]
 
-14. **[Checking Valid Age Range]
+14. **[Checking Valid Age Range]**
     - DescriptionL [The dataset has 102 values for age]
     - Affect Column(s): [data[['age']]]
     - Example: [Ages greater less than 1, greater than 100]
     - Potential Impact: [Age is assumed in years and therefore can't be 0]
+
+15. **[Checking Valid Years]**
+    -Description: [There are years greater than the present year in the dataset]
+    - Affected Columns: [data[['year']]]
+    - Example: [ 2.0 2111-01-01   ]
+    - Potential Impact: [These are invalid age years.]
 
 
     ### Indentified Solutions 
@@ -195,7 +201,11 @@
     - Solution Technique: [Identify ages less than 0 and greater than 100 and remove any matches]
     - Impact on Data Set: []
 
-
+15. **[Checking Valid Year Range]**
+    - Solution Technique: [Identify current date and remove entries greater than current date]
+    - Justification: [Years greater than 2023 are invalid. Although it is 2024, we will only include 2024 ]
+    - Impact on Dataset: [58% of the rows were removed. This greatly reduced the statistical power of the dataset.]
+    - Any assumptions: [We are assuming thsi data set is collected data, rather than simulated data. This data set could be forecasted data, but we are assuming it is population data collected. ] 
 ### Clean Data Summary
 
 | Column         | Non-Null Count | Dtype            | Unique Values | Mean              |
