@@ -203,9 +203,9 @@
 
 15. **[Checking Valid Year Range]**
     - Solution Technique: [Identify current date and remove entries greater than current date]
-    - Justification: [Years greater than 2023 are invalid. Although it is 2024, we will only include 2024 ]
-    - Impact on Dataset: [58% of the rows were removed. This greatly reduced the statistical power of the dataset.]
-    - Any assumptions: [We are assuming thsi data set is collected data, rather than simulated data. This data set could be forecasted data, but we are assuming it is population data collected. ] 
+    - Justification: [Dates greater than the present date are invalid.]
+    - Impact on Dataset: [50% of the rows were removed. This greatly reduced the statistical power of the dataset.]
+    - Any assumptions: [We are assuming this data set is collected data, rather than simulated data. This data set could be forecasted data, but we are assuming it is population data collected from a study. ] 
 ### Clean Data Summary
 
 | Column         | Non-Null Count | Dtype            | Unique Values | Mean              |
@@ -222,9 +222,13 @@
 1. The cleaned data set in comparison to the original one has a better handling of missing values, correct income categories, and appropriate data types for the numerical variables. 
 2. Checking if the impact of imputating was challenging, making new categories was challenging, and fixing why the categorical variables were still reporting as a Dtype of object was difficult. Challenges were overcome by changing approach to handling NaN values. Instead of trying to keep them in non integer variables, all rows with NaN were removed. 
 3. I learned how to organize the process of cleaning data and how to check if data cleaning was actually implemented. Through the checks I wrote in the code, it seemed like it was working, but after importing the cleaned data set and displaying the new formatted table, I found more errors. 
+*update 10-28-24*
+I learned a great way to handle excluding dates past the present date with datetime. Instead of removing entries with years greater than 2024, I calculated the present date and used that instead. This way, the script is adaptable to a different dataset and can work in future years if we wanted to include data past 2024. 
 4. Although the date-time format for year has been changed, the Dtype is still reporting sa int64 which needs to be investigated. Further analysis and visualization of the data prior to imputation would allow for better analysis of how imputation impacted the spread of the data. How I handled missing values also needs to be improved. 
 *update 10-26-24* 
 Handling of missing values was improved. All variabels are reported as correct Dtype. Further improvement includes checking to make sure no years are past 2024, capping outliers, renaming gender categories, and handling the high percent of missing data removed. This is a fun project!
+*update 10-28-24* 
+Handling of years was improved. The cleaned date now now only exludes data beyond the present date. Further improvements include handling the 101 age values. 
 
 
 
