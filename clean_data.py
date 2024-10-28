@@ -50,7 +50,7 @@ def clean_data(messy_file, clean_file):
 
     #Checking Ages are in Valid Range 
     print("\nChecking for invalid ages (outside 0-100 range)...")
-    invalid_ages = data[(data['age'] < 0) | (data['age'] > 100)]
+    invalid_ages = data[(data['age'] < 1) | (data['age'] > 100)]
     if not invalid_ages.empty:
         print(f"Invalid ages found:\n{invalid_ages}")
     else:
@@ -58,7 +58,7 @@ def clean_data(messy_file, clean_file):
     
     #Remove any non valid ages 
     print("\nFiltering out invalid ages...")
-    valid_data = data[(data['age'] > 0) & (data['age'] <= 100)]
+    valid_data = data[(data['age'] > 1) & (data['age'] <= 100)]
     print(f"Row count after filtering invalid ages: {len(valid_data)} "
           f"(removed {len(data) - len(valid_data)} rows)")
 
