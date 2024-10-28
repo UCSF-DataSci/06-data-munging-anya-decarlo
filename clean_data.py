@@ -46,7 +46,7 @@ def clean_data(messy_file, clean_file):
     data['age'] = data['age'].fillna(data['age'].mean())
 
     #Convert 'age' to integer 
-    data['age'] = pd.to_numeric(data['age'], errors='coerce')
+    data['age'] = data['age'].round().astype(int)
 
     #Checking Ages are in Valid Range 
     print("\nChecking for invalid ages (outside 0-100 range)...")
@@ -61,6 +61,7 @@ def clean_data(messy_file, clean_file):
     valid_data = data[(data['age'] > 0) & (data['age'] <= 100)]
     print(f"Row count after filtering invalid ages: {len(valid_data)} "
           f"(removed {len(data) - len(valid_data)} rows)")
+
 
     #Convert empty strings and spaces in'population' to NaN
     data['population'] = data['population'].replace(['', ' '], pd.NA)  
