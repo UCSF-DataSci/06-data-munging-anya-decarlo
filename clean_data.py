@@ -21,8 +21,11 @@ def clean_data(messy_file, clean_file):
     #Initial row count for data 
     initial_row_count = len(data)
 
-    #Drop duplicated data
-    data.drop_duplicates(inplace=True)
+    #Drop duplicates with loading bar
+    print("Removing duplicates...")
+    with tqdm(total=1) as pbar:
+        data.drop_duplicates(inplace=True)
+        pbar.update(1)
 
     #Verify duplicated data was removed 
     if len(data) == initial_row_count:
@@ -102,7 +105,7 @@ def clean_data(messy_file, clean_file):
     'lower_middle_income_typo': 'lower_middle_income',
     'upper_middle_income_typo': 'upper_middle_income',
     'high_income_typo': 'high_income'
-}
+    }
     #Replace typos 
     data['income_groups'] = data['income_groups'].replace(income_group_replacements)
 
@@ -138,4 +141,9 @@ def clean_data(messy_file, clean_file):
     data.to_csv(clean_file, index=False)
     
 if __name__ == "__main__":
-    clean_data('messy_population_data.csv', 'cleaned_population_data.csv')
+    parser = argparse.ArgumentParser(description="Clean messy data file.")
+    parser.add_argument('messy_file', help='Path to the messy input CSV file')
+    parser.add_argument('clean_file', help='Path to the cleaned output CSV file')
+    args = parser.parse_args()
+    
+    clean_data(args.messy_file, args.clean_file)
