@@ -104,6 +104,10 @@
     - Potential Impact: [Outliers can skew results, influence models, hide patterns in data, impact predictions,and affect normality assumptions]
 
 14. **[Checking Valid Age Range]
+    - DescriptionL [The dataset has 102 values for age]
+    - Affect Column(s): [data[['age']]]
+    - Example: [Ages greater less than 1, greater than 100]
+    - Potential Impact: [Age is assumed in years and therefore can't be 0]
 
 
     ### Indentified Solutions 
@@ -186,6 +190,10 @@
     - Justification: [Preserve the size of the dataset and do not have sufficient evidence that outliers aren't relevent to the study]
     - Impact on Data Set: []
     - Any Assumptions: [Assuming outliers are due to actual variability in data and are not measurnment errors]
+
+14. **[Checking Valid Age Range]
+    - Solution Technique: [Identify ages less than 0 and greater than 100 and remove any matches]
+    - Impact on Data Set: []
 
 
 ### Clean Data Summary
