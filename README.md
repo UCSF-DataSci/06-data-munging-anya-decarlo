@@ -197,25 +197,25 @@
     - Impact on Data Set: []
     - Any Assumptions: [Assuming outliers are due to actual variability in data and are not measurnment errors]
 
-14. **[Checking Valid Age Range]
+14. **[Checking Valid Age Range]**
     - Solution Technique: [Identify ages less than 0 and greater than 100 and remove any matches]
-    - Impact on Data Set: []
+    - Justification [Ages can't be less than 0 as ages are reported as yeasr]
+    - Impact on Data Set: [Solution not working]
+    - Any assumptions: [Assuming 0 is incorect, babies could be included in data set and this may be why 0 is a valid number. We are also assuming that children in this dataset are valid, even though there is income group data which implies a job. There is no verification of employment or what income data refers to, so we are assuming all non 0 years - 100 are valid.]
 
 15. **[Checking Valid Year Range]**
     - Solution Technique: [Identify current date and remove entries greater than current date]
     - Justification: [Dates greater than the present date are invalid.]
     - Impact on Dataset: [50% of the rows were removed. This greatly reduced the statistical power of the dataset.]
     - Any assumptions: [We are assuming this data set is collected data, rather than simulated data. This data set could be forecasted data, but we are assuming it is population data collected from a study. ] 
-### Clean Data Summary
-
-| Column         | Non-Null Count | Dtype            | Unique Values | Mean              |
-|----------------|----------------|------------------|---------------|------------------:|
-| income_groups  | 105,716        | category         | 4             | N/A               |
-| age            | 105,716        | int64            | 101           | 50.037109         |
-| gender         | 105,716        | category         | 3             | N/A               |
-| year           | 105,716        | datetime64[ns]   | 169           | N/A               |
-| population     | 105,716        | int64            | 99,033        | 113,277,972.864921 |
-
+## Dataset Overview After Cleaning
+| Column        | Non-Null Count | Dtype           | Unique Values | Mean              |
+|---------------|----------------|-----------------|---------------|-------------------|
+| income_groups | 52,402         | category        | 4             | N/A               |
+| age           | 52,402         | int64           | 101           | 49.99             |
+| gender        | 52,402         | category        | 3             | N/A               |
+| year          | 52,402         | datetime64[ns]  | 75            | N/A               |
+| population    | 52,402         | int64           | 48,908        |88600288.716728    |
 
 ### Final Thoughts
 
