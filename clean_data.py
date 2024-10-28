@@ -48,6 +48,21 @@ def clean_data(messy_file, clean_file):
     #Convert 'age' to integer 
     data['age'] = data['age'].round().astype(int)
 
+    #Checking Ages are in Valid Range 
+    print("\nChecking for invalid ages (outside 0-100 range)...")
+    invalid_ages = data[(data['age'] < 0) | (data['age'] > 100)]
+    if not invalid_ages.empty:
+        print(f"Invalid ages found:\n{invalid_ages}")
+    else:
+        print("All ages are within the valid range (0-100).")
+    
+    #Remove any non valid ages 
+    print("\nFiltering out invalid ages...")
+    valid_data = data[(data['age'] >= 0) & (data['age'] <= 100)]
+    print(f"Row count after filtering invalid ages: {len(valid_data)} "
+          f"(removed {len(data) - len(valid_data)} rows)")
+
+
     #Convert empty strings and spaces in'population' to NaN
     data['population'] = data['population'].replace(['', ' '], pd.NA)  
 
@@ -134,7 +149,7 @@ def clean_data(messy_file, clean_file):
         'Mean': data.mean(numeric_only=True).reindex(data.columns, fill_value='N/A').values
     })
 
-    #display the cleaned data table   
+    #Display the cleaned data table   
     print(summarize_new)
     
     #Save clean data to CSV

@@ -103,6 +103,8 @@
     1.5 +- IQR]
     - Potential Impact: [Outliers can skew results, influence models, hide patterns in data, impact predictions,and affect normality assumptions]
 
+14. **[Checking Valid Age Range]
+
 
     ### Indentified Solutions 
 
