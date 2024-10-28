@@ -139,6 +139,30 @@ def clean_data(messy_file, clean_file):
     #Convert 'year' to date-time data type
     data['year'] = pd.to_datetime(data['year'].astype(int).astype(str), format='%Y', errors='coerce')
 
+    #Find and print years great than 2024
+    print("\nChecking for years greater than 2024...")
+    invalid_years = data[data['year'].dt.year > 2024]
+    if not invalid_years.empty:
+        print(f"Found {len(invalid_years)} rows with years greater than 2024:\n{invalid_years}")
+    else:
+        print("No years greater than 2024 found.")
+
+    #Remove rows where year is greater than 2024
+    print("\nRemoving rows with years greater than 2024...")
+    data = data[data['year'].dt.year <= 2024]
+
+    #Calculate and print percent of rows removed 
+    rows_removed = initial_row_count - len(data)
+    percent_removed = (rows_removed / initial_row_count) * 100
+    print(f"\nTotal rows removed: {rows_removed} out of {initial_row_count} "
+      f"({percent_removed:.2f}% of the rows).")
+
+    #Verify the removal of invalid years
+    if (data['year'].dt.year > 2024).any():
+        print("Error: Some rows with years greater than 2024 still remain!")
+    else:
+     print("All rows with years greater than 2024 have been successfully removed.")
+
     #Summarize cleaned data 
     summarize_new = pd.DataFrame({
         'Column': data.columns,

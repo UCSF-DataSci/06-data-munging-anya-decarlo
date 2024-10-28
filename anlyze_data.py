@@ -52,6 +52,10 @@ print(data['age'].value_counts(dropna=False))
 #print unique values for age
 print(data['age'].unique())
 
+#print frrequencies for age
+print("\nFrequency of each unique age value:")
+print(data['age'].value_counts().sort_index())
+
 #any negative values or values over 100 for age 
 print(data[(data['age'] < 0) | (data['age'] > 100)])
 
