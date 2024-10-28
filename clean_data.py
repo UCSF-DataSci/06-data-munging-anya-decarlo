@@ -58,10 +58,9 @@ def clean_data(messy_file, clean_file):
     
     #Remove any non valid ages 
     print("\nFiltering out invalid ages...")
-    valid_data = data[(data['age'] > 1) & (data['age'] <= 100)]
+    valid_data = data[(data['age'] >= 1) & (data['age'] <= 100)]
     print(f"Row count after filtering invalid ages: {len(valid_data)} "
           f"(removed {len(data) - len(valid_data)} rows)")
-
 
     #Convert empty strings and spaces in'population' to NaN
     data['population'] = data['population'].replace(['', ' '], pd.NA)  
