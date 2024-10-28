@@ -46,7 +46,7 @@ def clean_data(messy_file, clean_file):
     data['age'] = data['age'].fillna(data['age'].mean())
 
     #Convert 'age' to integer 
-    data['age'] = data['age'].round().astype(int)
+    data['age'] = pd.to_numeric(data['age'], errors='coerce')
 
     #Checking Ages are in Valid Range 
     print("\nChecking for invalid ages (outside 0-100 range)...")
